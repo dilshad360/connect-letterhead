@@ -2,7 +2,6 @@ import { Button, Input, Textarea, Dialog, Typography, DialogBody, DialogFooter ,
 import Doc from "./components/Doc";
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useState } from "react";
-import ChefGif from "./assets/chef.gif"
 import Logo from "./assets/logo.png"
 
 
@@ -12,14 +11,13 @@ function App() {
 
   const [open, setOpen] = useState(false);
 
-  const handleOpen = () => setOpen(!open);
 
   const generateLetter = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target)
     const payload = Object.fromEntries(formData);
     setLetterData(payload)
-    handleOpen()
+    setOpen(true)
   }
 
 
@@ -37,31 +35,14 @@ function App() {
         <Button fullWidth className="flex justify-center gap-2 items-center" type="submit">Write</Button>
       </form>
 
-      <Dialog open={open} handler={handleOpen}>
-        <DialogBody className="grid place-items-center gap-4">
-          <img className="rounded-lg" src={ChefGif} alt="chefgif" />
-          <Typography className="text-center font-normal">
-            Your letter has been cooked to perfection
-          </Typography>
-        </DialogBody>
-        <DialogFooter className="space-x-2">
-          <Button variant="text" color="blue-gray" onClick={handleOpen}>
-            close
-          </Button>
-          <PDFDownloadLink document={<Doc data={letterData} />} fileName="connect-letter.pdf">
-            {({ blob, url, loading, error }) =>
-              loading ? (<Spinner />) : (<Button fullWidth className="flex justify-center gap-2 items-center">Download</Button>)
-            }
-          </PDFDownloadLink>
-        </DialogFooter>
-      </Dialog>
 
-
+{open && 
       <PDFDownloadLink document={<Doc data={letterData} />} fileName="connect-letter.pdf">
             {({ blob, url, loading, error }) =>
-              loading ? (<Spinner />) : (<Button fullWidth className="flex justify-center gap-2 items-center">Download</Button>)
+              loading ? (<Button fullWidth disabled className="mt-2">Loading...</Button>) : (<Button fullWidth className="mt-2 bg-green-500">Download</Button>)
             }
-          </PDFDownloadLink>
+      </PDFDownloadLink>
+}
     </div>
   )
 }
