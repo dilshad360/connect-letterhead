@@ -1,8 +1,9 @@
-import { Button, Input, Textarea, Dialog, Typography, DialogBody, DialogFooter ,Spinner } from "@material-tailwind/react";
+import { Button, Input, Textarea} from "@material-tailwind/react";
 import Doc from "./components/Doc";
-import { PDFDownloadLink } from '@react-pdf/renderer';
+import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
 import { useState } from "react";
 import Logo from "./assets/logo.png"
+import getDayName from "./utils/getDayName";
 
 
 function App() {
@@ -17,8 +18,10 @@ function App() {
     const formData = new FormData(e.target)
     const payload = Object.fromEntries(formData);
     setLetterData(payload)
+    setLetterData(prev => ({...prev, day: `${getDayName(new Date(payload.date))}`,}));
     setOpen(true)
   }
+
 
 
   return (
@@ -43,7 +46,14 @@ function App() {
             }
       </PDFDownloadLink>
 }
+
+  <PDFViewer className="w-full h-56 rounded-lg mt-4">
+    <Doc data={letterData} />
+  </PDFViewer>
+
+
     </div>
+
   )
 }
 
