@@ -1,6 +1,6 @@
 import { Button, Input, Textarea} from "@material-tailwind/react";
 import Doc from "./components/Doc";
-import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useState } from "react";
 import Logo from "/logo.png"
 import getDayName from "./utils/getDayName";
@@ -52,11 +52,6 @@ function App() {
             }
       </PDFDownloadLink>
 }
-
-  {/* <PDFViewer className="w-full h-screen mt-8 rounded-lg">
-    <Doc data={letterData} />
-  </PDFViewer> */}
- 
 
     </div>
 

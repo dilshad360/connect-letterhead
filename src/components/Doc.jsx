@@ -35,7 +35,8 @@ const Doc = ({ data }) => {
             paddingBottom: 36
         },
         subject:{
-            paddingBottom: 24
+            paddingBottom: 24,
+            paddingRight: 46,
         },
         content:{
             paddingBottom: 36,
